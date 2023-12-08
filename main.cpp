@@ -17,7 +17,7 @@ private:
     vector<User>& fusers;
 public:
     ~User()=default;
-    User(string name="", int age=0, int pesel=0, string document_number="", bool logged=false, string password="", int number=0, vector<User>& users)
+    User(string name, int age, int pesel, string document_number, bool logged, string password, int number, vector<User>& users):fusers(users)
     {
         fname = name;
         fage=age;
@@ -25,8 +25,8 @@ public:
         fdocument_number=document_number;
         flogged = logged;
         fpassword=password;
-        fnumber=users.size()-1;
-        fusers=users;
+        fnumber=number;
+        //fusers=users;
     }
 
     void set_name(string name){fname=name;}
@@ -35,6 +35,7 @@ public:
     void set_document_number(string document_number){fdocument_number=document_number;}
     void set_logged(bool logged){flogged=logged;}
     void set_password(string password){fpassword=password;}
+    void set_number(int number){fnumber = number;}
 
     string get_name(void)const{return fname;}
     int get_age(void)const{return fage;}
@@ -79,19 +80,15 @@ public:
 class Admin: public User
 {
 private:
-    vector<User>& fusers;
+    //vector<User>& fusers;
     vector<Admin>& fadmins;
 public:
     ~Admin()=default;
-    Admin(string name="", int age=18, int pesel=0, string document_number="", bool logged=false, string password="", number=0;)
+    Admin(vector<User>& users, vector<Admin>& admins, string name, int age, int pesel, string document_number, bool logged, string password, int number)
+        : User(name, age, pesel, document_number, logged, password, number, users), fadmins(admins) 
         {
-            set_name(name);
-            set_age(age);
-            set_pesel(pesel);
-            set_document_number(document_number);
-            set_logged(logged);
-            set_password(password);
-        }
+        //fadmins=admins;
+    }
     
 
 
@@ -102,7 +99,7 @@ public:
 int main(){
 
     vector<User> users;
-    vector<string, Admin> admins;
+    vector<Admin> admins;
     bool c=true;
     while(c)
     {
