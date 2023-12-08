@@ -13,9 +13,11 @@ private:
     string fdocument_number;
     bool flogged;
     string fpassword;
+    int fnumber;
+    vector<User>& fusers;
 public:
     ~User()=default;
-    User(string name="", int age=18, int pesel=0, string document_number="", bool logged=false, string password="")
+    User(string name="", int age=0, int pesel=0, string document_number="", bool logged=false, string password="", int number=0, vector<User>& users)
     {
         fname = name;
         fage=age;
@@ -23,6 +25,8 @@ public:
         fdocument_number=document_number;
         flogged = logged;
         fpassword=password;
+        fnumber=users.size()-1;
+        fusers=users;
     }
 
     void set_name(string name){fname=name;}
@@ -38,6 +42,7 @@ public:
     string get_document_number(void)const{return fdocument_number;}
     bool get_logged(void)const{return flogged;}
     string get_password(void)const{return fpassword;}
+    int get_number(void)const{return fnumber;}
     
     void change_password(string password)
     {
@@ -74,25 +79,30 @@ public:
 class Admin: public User
 {
 private:
+    vector<User>& fusers;
+    vector<Admin>& fadmins;
 public:
-~Admin()=default;
-Admin(string name="", int age=18, int pesel=0, string document_number="", bool logged=false, string password="")
-    {
-        set_name(name);
-        set_age(age);
-        set_pesel(pesel);
-        set_document_number(document_number);
-        set_logged(logged);
-        set_password(password);
-    }
+    ~Admin()=default;
+    Admin(string name="", int age=18, int pesel=0, string document_number="", bool logged=false, string password="", number=0;)
+        {
+            set_name(name);
+            set_age(age);
+            set_pesel(pesel);
+            set_document_number(document_number);
+            set_logged(logged);
+            set_password(password);
+        }
+    
+
+
 };
 
 
 
 int main(){
 
-    map<string, User> users;
-    map<string, Admin> admins;
+    vector<User> users;
+    vector<string, Admin> admins;
     bool c=true;
     while(c)
     {
