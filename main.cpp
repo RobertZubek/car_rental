@@ -26,6 +26,7 @@ public:
         flogged = logged;
         fpassword=password;
         
+        
     }
 
     void set_name(string name){fname=name;}
