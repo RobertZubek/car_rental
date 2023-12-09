@@ -72,7 +72,7 @@ public:
 
     bool login(string password)
     {
-        if(password==fpassword){flogged=true; return true;}
+        if(password==fpassword){cout<<"Logged susscessfully"<<endl; flogged=true; return true;}
         else{cout<<"Wrong password"<<endl; flogged=false; return false;}
     }
 
@@ -112,11 +112,14 @@ void update_admin_number(vector<Admin>& admins)
     }
 }
 
+void adminMenu(vector<User>& users, vector<Admin>& admins);
 
 int main(){
-
     vector<User> users;
     vector<Admin> admins;
+    Admin def_admin(users, admins, "def",21,0,"0",false,"1111");
+    admins.push_back(def_admin);
+    update_admin_number(admins);
     bool c=true;
     while(c)
     {
@@ -129,12 +132,24 @@ int main(){
         cout<<"3. Exit program."<<endl;
         int choice;
         cin>>choice;
-        if(choice==1){cout<<1<<endl;c=false;}
+        if(choice==1){adminMenu(users, admins);}
         else if(choice==2){cout<<2<<endl;c=false;}
         else if(choice==3){cout<<3<<endl;c=false;}
         else{cout<<"Enter correct value"<<endl;}
 
     }
     
+
+}
+
+void adminMenu(vector<User>& users, vector<Admin>& admins)
+{   
+    int tempnumber;
+    cout<<"Type in your admin number"<<endl;
+    cin>>tempnumber;
+    string tempPasswd;
+    cout<<"Type in your password please"<<endl;
+    cin>>tempPasswd;
+    admins[tempnumber].login(tempPasswd);
 
 }
