@@ -28,7 +28,6 @@ public:
         
         
     }
-///////////
     void set_name(string name){fname=name;}
     void set_age(int age){fage=age;}
     void set_pesel(int pesel){fpesel=pesel;}
