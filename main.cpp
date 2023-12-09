@@ -17,7 +17,7 @@ private:
     vector<User>& fusers;
 public:
     ~User()=default;
-    User(string name, int age, int pesel, string document_number, bool logged, string password, int number, vector<User>& users):fusers(users)
+    User(string name, int age, int pesel, string document_number, bool logged, string password, vector<User>& users):fusers(users)
     {
         fname = name;
         fage=age;
@@ -25,8 +25,7 @@ public:
         fdocument_number=document_number;
         flogged = logged;
         fpassword=password;
-        fnumber=number;
-        //fusers=users;
+        
     }
 
     void set_name(string name){fname=name;}
@@ -45,7 +44,7 @@ public:
     string get_password(void)const{return fpassword;}
     int get_number(void)const{return fnumber;}
     
-    void change_password(string password)
+    bool change_password(string password)
     {
         if(password==fpassword)
         {
@@ -54,10 +53,12 @@ public:
             cin>>new_password;
             set_password(new_password);
             cout<<"Password changed"<<endl;
+            return true;
         }
         else
         {
             cout<<"Wrong password"<<endl;
+            return false;
         }
     }
     void remember_password(int pesel, string document_number)
@@ -66,34 +67,50 @@ public:
         {
             cout<<get_password()<<endl;
         }
-        else{cout<<"Wrong data"<<endl;}
+        else{cout<<"Wrong data, try again"<<endl;}
     }
 
-    void login(string password)
+    bool login(string password)
     {
-        if(password==fpassword){flogged=true;}
-        else{cout<<"Wrong password"<<endl;}
+        if(password==fpassword){flogged=true; return true;}
+        else{cout<<"Wrong password"<<endl; flogged=false; return false;}
     }
+
+ 
 
 };
 
 class Admin: public User
 {
 private:
-    //vector<User>& fusers;
     vector<Admin>& fadmins;
 public:
     ~Admin()=default;
-    Admin(vector<User>& users, vector<Admin>& admins, string name, int age, int pesel, string document_number, bool logged, string password, int number)
-        : User(name, age, pesel, document_number, logged, password, number, users), fadmins(admins) 
+    Admin(vector<User>& users, vector<Admin>& admins, string name, int age, int pesel, string document_number, bool logged, string password)
+        : User(name, age, pesel, document_number, logged, password, users), fadmins(admins) 
         {
-        //fadmins=admins;
+        
     }
-    
 
 
 };
 
+
+void update_usr_number(vector<User>& users)
+{
+    for(int i=0;i<=users.size();i++)
+    {
+        users[i].set_number(i);
+    }
+}
+
+void update_admin_number(vector<Admin>& admins)
+{
+    for(int i=0;i<=admins.size();i++)
+    {
+        admins[i].set_number(i);
+    }
+}
 
 
 int main(){
