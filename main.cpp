@@ -164,8 +164,27 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
 }
 
 void registerMenu(vector<User>& users, vector<Admin>& admins)
-{
-    
+{   
+    string tempName;
+    int tempAge;
+    int tempPesel;
+    string tempDocNumber;
+    string tempPasswd;
+    cout<<"Type in your name:"<<endl;
+    cin>>tempName;
+    cout<<"Type in your age:"<<endl;
+    cin>>tempAge;
+    cout<<"Type in your Pesel:"<<endl;
+    cin>>tempPesel;
+    cout<<"Type in your document number:"<<endl;
+    cin>>tempDocNumber;
+    cout<<"Type in your password:"<<endl;
+    cin>>tempPasswd;
+    User tempUser(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, users);
+    users.push_back(tempUser);
+    update_usr_number(users);
+    cout<<"User created!"<<endl;
+    cout<<"Your user number is "<<users.size()-1<<endl;
 }
 
 void rememberUsrNumberMenu(vector<User>& users)
@@ -179,7 +198,7 @@ void rememberUsrNumberMenu(vector<User>& users)
         if(users[i].get_name()==tempstring){number=i;}
     }
     if(number==99999){cout<<"User not found"<<endl;}
-    else {cout<<number<<endl;}
+    else {cout<<"Your user number is: "<<number<<endl;}
 }
 
 void rememberAdmNumberMenu(vector<Admin>& admins)
@@ -193,6 +212,6 @@ void rememberAdmNumberMenu(vector<Admin>& admins)
         if(admins[i].get_name()==tempstring){number=i;}
     }
     if(number==99999){cout<<"Admin not found"<<endl;}
-    else {cout<<number<<endl;}
+    else {cout<<"Your admin number is: "<<number<<endl;}
     
 }
