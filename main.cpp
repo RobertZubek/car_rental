@@ -113,6 +113,9 @@ void update_admin_number(vector<Admin>& admins)
 }
 
 void adminMenu(vector<User>& users, vector<Admin>& admins);
+void registerMenu(vector<User>& users, vector<Admin>& admins);
+void rememberUsrNumberMenu(vector<User>& users);
+void rememberAdmNumberMenu(vector<Admin>& admins);
 
 int main(){
     vector<User> users;
@@ -130,11 +133,17 @@ int main(){
         cout<<"1. Login as an admin"<<endl;
         cout<<"2. Login as an borrower"<<endl;
         cout<<"3. Exit program."<<endl;
+        cout<<"4. Register"<<endl;
+        cout<<"5. Remember your user number"<<endl;
+        cout<<"6. Remember your admin number"<<endl;
         int choice;
         cin>>choice;
         if(choice==1){adminMenu(users, admins);}
         else if(choice==2){cout<<2<<endl;c=false;}
         else if(choice==3){cout<<3<<endl;c=false;}
+        else if(choice==4){registerMenu(users, admins);}
+        else if(choice==5){rememberUsrNumberMenu(users);}
+        else if(choice==6){rememberAdmNumberMenu(admins);}
         else{cout<<"Enter correct value"<<endl;}
 
     }
@@ -152,4 +161,38 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
     cin>>tempPasswd;
     admins[tempnumber].login(tempPasswd);
 
+}
+
+void registerMenu(vector<User>& users, vector<Admin>& admins)
+{
+    
+}
+
+void rememberUsrNumberMenu(vector<User>& users)
+{
+    string tempstring;
+    cout<<"Type in your name please"<<endl;
+    cin>>tempstring;
+    int number=99999;
+    for(int i=0; i<=users.size(); i++)
+    {
+        if(users[i].get_name()==tempstring){number=i;}
+    }
+    if(number==99999){cout<<"User not found"<<endl;}
+    else {cout<<number<<endl;}
+}
+
+void rememberAdmNumberMenu(vector<Admin>& admins)
+{
+    string tempstring;
+    cout<<"Type in your name please"<<endl;
+    cin>>tempstring;
+    int number=99999;
+    for(int i=0; i<=admins.size(); i++)
+    {
+        if(admins[i].get_name()==tempstring){number=i;}
+    }
+    if(number==99999){cout<<"Admin not found"<<endl;}
+    else {cout<<number<<endl;}
+    
 }
