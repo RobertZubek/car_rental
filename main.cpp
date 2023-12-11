@@ -76,6 +76,11 @@ public:
         else{cout<<"Wrong password"<<endl; flogged=false; return false;}
     }
 
+    bool logOut(void)
+    {
+        if(flogged==true){flogged=false;}
+    }
+
  
 
 };
@@ -159,7 +164,17 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
     string tempPasswd;
     cout<<"Type in your password please"<<endl;
     cin>>tempPasswd;
-    admins[tempnumber].login(tempPasswd);
+    if(admins[tempnumber].login(tempPasswd)==true)
+    {
+        int choice;
+        cout<<endl;
+        cout<<"ADMIN MENU"<<endl;
+        cout<<"****************"<<endl;
+        cout<<endl;
+        cout<<"1. Log out"<<endl;
+        cin>>choice;
+        if (choice==1) {admins[tempnumber].logOut();}
+    }
 
 }
 
