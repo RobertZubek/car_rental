@@ -76,7 +76,7 @@ public:
         else{cout<<"Wrong password"<<endl; flogged=false; return false;}
     }
 
-    bool logOut(void)
+    void logOut(void)
     {
         if(flogged==true){flogged=false;}
     }
@@ -121,6 +121,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
+void admRegister(vector<User>& users, vector<Admin>& admins);
 
 int main(){
     vector<User> users;
@@ -172,12 +173,36 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
         cout<<"****************"<<endl;
         cout<<endl;
         cout<<"1. Log out"<<endl;
+        cout<<"2. Add an admin"<<endl;
         cin>>choice;
         if (choice==1) {admins[tempnumber].logOut();}
+        if (choice==2){admRegister(users, admins);}
     }
 
 }
-
+void admRegister(vector <User>& users, vector<Admin>& admins)
+{   
+    string tempName;
+    int tempAge;
+    int tempPesel;
+    string tempDocNumber;
+    string tempPasswd;
+    cout<<"Type in your name:"<<endl;
+    cin>>tempName;
+    cout<<"Type in your age:"<<endl;
+    cin>>tempAge;
+    cout<<"Type in your Pesel:"<<endl;
+    cin>>tempPesel;
+    cout<<"Type in your document number:"<<endl;
+    cin>>tempDocNumber;
+    cout<<"Type in your password:"<<endl;
+    cin>>tempPasswd;
+    Admin tempAdmin(users, admins, tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd);
+    admins.push_back(tempAdmin);
+    update_admin_number(admins);
+    cout<<"Admin added!"<<endl;
+    cout<<"Your admin number is "<<admins.size()-1<<endl;
+}
 void registerMenu(vector<User>& users, vector<Admin>& admins)
 {   
     string tempName;
