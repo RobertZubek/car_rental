@@ -113,7 +113,7 @@ private:
     float fprice;
 public:
     ~Car()=default;
-    Car(vector<Car>& cars, string status, string model, string description, float price)
+    Car(string status, string model, string description, float price)
     {
         fstatus=status;
         fmodel=model;
@@ -137,7 +137,7 @@ public:
 ostream& operator<< (ostream& out, const Car& car)
 {
     out<<"Car model: "<<car.get_model()<<endl;
-    out<<"Car status: "<<car.get_model()<<endl;
+    out<<"Car status: "<<car.get_status()<<endl;
     out<<"Car description: "<<car.get_description()<<endl;
     out<<"Car price per day: "<<car.get_price()<<endl;
     return out;
@@ -160,8 +160,8 @@ void update_admin_number(vector<Admin>& admins)
     }
 }
 
-void adminMenu(vector<User>& users, vector<Admin>& admins);
-void userMenu(vector<User>& users, vector<Admin>& admins);
+void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
+void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
@@ -170,6 +170,7 @@ void admRegister(vector<User>& users, vector<Admin>& admins);
 int main(){
     vector<User> users;
     vector<Admin> admins;
+    vector<Car> cars;
     Admin def_admin(users, admins, "def",21,0,"0",false,"1111", true);
     admins.push_back(def_admin);
     update_admin_number(admins);
@@ -188,8 +189,8 @@ int main(){
         cout<<"6. Remember your admin number"<<endl;
         int choice;
         cin>>choice;
-        if(choice==1){adminMenu(users, admins);}
-        else if(choice==2){userMenu(users, admins);}
+        if(choice==1){adminMenu(users, admins, cars);}
+        else if(choice==2){userMenu(users, admins, cars);}
         else if(choice==3){c=false;}
         else if(choice==4){registerMenu(users, admins);}
         else if(choice==5){rememberUsrNumberMenu(users);}
@@ -201,7 +202,7 @@ int main(){
 
 }
 
-void userMenu(vector<User>& users, vector<Admin>& admins)
+void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
 {   
     int tempnumber;
     cout<<"Type in your user number"<<endl;
@@ -236,7 +237,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins)
 
 }
 
-void adminMenu(vector<User>& users, vector<Admin>& admins)
+void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
 {   
     int tempnumber;
     cout<<"Type in your admin number"<<endl;
@@ -263,6 +264,8 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
             cout<<"4. View messages"<<endl;
             cout<<"5. Deactivate an user"<<endl;
             cout<<"6. Deactivate an admin"<<endl;
+            cout<<"7. Add a car"<<endl;
+            cout<<"8. See list of cars"<<endl;
             cin>>choice;
             if (choice==1) {admins[tempnumber].logOut();}
             if (choice==2){admRegister(users, admins);}
@@ -289,6 +292,31 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
                 cout<<"Type 1 to confirm"<<endl;
                 cin>>confirmation;
                 if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
+            }
+            if(choice==7)
+            {
+                string tempModel;
+                string tempStatus;
+                string tempDescription;
+                float tempPrice;
+                cout<<"Type in car model: "<<endl;
+                cin>>tempModel;
+                cout<<"Type in car status: "<<endl;
+                cin>>tempStatus;
+                cout<<"Type in car description: "<<endl;
+                cin>>tempDescription;
+                cout<<"Type in car rental price per day:"<<endl;
+                cin>>tempPrice;
+                Car tempCar(tempStatus, tempModel, tempDescription, tempPrice);
+                cars.push_back(tempCar);
+                cout<<"Car added!"<<endl;
+            }
+            if(choice==8)
+            {
+                for(int i=0;i<cars.size();i++)
+                {
+                    cout<<cars[i];
+                }
             }
         }
     }
