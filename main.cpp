@@ -118,6 +118,7 @@ void update_admin_number(vector<Admin>& admins)
 }
 
 void adminMenu(vector<User>& users, vector<Admin>& admins);
+void userMenu(vector<User>& users, vector<Admin>& admins);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
@@ -145,8 +146,8 @@ int main(){
         int choice;
         cin>>choice;
         if(choice==1){adminMenu(users, admins);}
-        else if(choice==2){cout<<2<<endl;c=false;}
-        else if(choice==3){cout<<3<<endl;c=false;}
+        else if(choice==2){userMenu(users, admins);}
+        else if(choice==3){c=false;}
         else if(choice==4){registerMenu(users, admins);}
         else if(choice==5){rememberUsrNumberMenu(users);}
         else if(choice==6){rememberAdmNumberMenu(admins);}
@@ -154,6 +155,33 @@ int main(){
 
     }
     
+
+}
+
+void userMenu(vector<User>& users, vector<Admin>& admins)
+{   
+    int tempnumber;
+    cout<<"Type in your user number"<<endl;
+    cin>>tempnumber;
+    string tempPasswd;
+    cout<<"Type in your password please"<<endl;
+    cin>>tempPasswd;
+    if(users[tempnumber].login(tempPasswd)==true)
+    {
+        int choice;
+        cout<<endl;
+        cout<<"USER MENU"<<endl;
+        cout<<"****************"<<endl;
+        cout<<endl;
+        cout<<"1. Log out"<<endl;
+        cout<<"2. Rent a car"<<endl;
+        cout<<"3. List of cars"<<endl;
+        cout<<"4. Message an admin"<<endl;
+        cout<<"5. View messages"<<endl;
+        cin>>choice;
+        if (choice==1) {users[tempnumber].logOut();}
+        if (choice==2){admRegister(users, admins);}
+    }
 
 }
 
@@ -174,6 +202,10 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
         cout<<endl;
         cout<<"1. Log out"<<endl;
         cout<<"2. Add an admin"<<endl;
+        cout<<"3. View rent requests"<<endl;
+        cout<<"4. View messages"<<endl;
+        cout<<"5. Delete an user"<<endl;
+        cout<<"6. Delete an admin"<<endl;
         cin>>choice;
         if (choice==1) {admins[tempnumber].logOut();}
         if (choice==2){admRegister(users, admins);}
