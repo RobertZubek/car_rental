@@ -15,9 +15,10 @@ private:
     string fpassword;
     int fnumber;
     vector<User>& fusers;
+    bool factive;
 public:
     ~User()=default;
-    User(string name, int age, int pesel, string document_number, bool logged, string password, vector<User>& users):fusers(users)
+    User(string name, int age, int pesel, string document_number, bool logged, string password, vector<User>& users, bool active):fusers(users)
     {
         fname = name;
         fage=age;
@@ -25,6 +26,7 @@ public:
         fdocument_number=document_number;
         flogged = logged;
         fpassword=password;
+        factive=active;
         
         
     }
@@ -35,6 +37,7 @@ public:
     void set_logged(bool logged){flogged=logged;}
     void set_password(string password){fpassword=password;}
     void set_number(int number){fnumber = number;}
+    void set_active(bool active){factive = active;}
 
     string get_name(void)const{return fname;}
     int get_age(void)const{return fage;}
@@ -43,6 +46,7 @@ public:
     bool get_logged(void)const{return flogged;}
     string get_password(void)const{return fpassword;}
     int get_number(void)const{return fnumber;}
+    bool get_active(void)const{return factive;}
     
     bool change_password(string password)
     {
@@ -91,8 +95,8 @@ private:
     vector<Admin>& fadmins;
 public:
     ~Admin()=default;
-    Admin(vector<User>& users, vector<Admin>& admins, string name, int age, int pesel, string document_number, bool logged, string password)
-        : User(name, age, pesel, document_number, logged, password, users), fadmins(admins) 
+    Admin(vector<User>& users, vector<Admin>& admins, string name, int age, int pesel, string document_number, bool logged, string password, bool active)
+        : User(name, age, pesel, document_number, logged, password, users, active), fadmins(admins) 
         {
         
     }
@@ -127,7 +131,7 @@ void admRegister(vector<User>& users, vector<Admin>& admins);
 int main(){
     vector<User> users;
     vector<Admin> admins;
-    Admin def_admin(users, admins, "def",21,0,"0",false,"1111");
+    Admin def_admin(users, admins, "def",21,0,"0",false,"1111", true);
     admins.push_back(def_admin);
     update_admin_number(admins);
     bool c=true;
@@ -204,11 +208,35 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
         cout<<"2. Add an admin"<<endl;
         cout<<"3. View rent requests"<<endl;
         cout<<"4. View messages"<<endl;
-        cout<<"5. Delete an user"<<endl;
-        cout<<"6. Delete an admin"<<endl;
+        cout<<"5. Deactivate an user"<<endl;
+        cout<<"6. Deactivate an admin"<<endl;
         cin>>choice;
         if (choice==1) {admins[tempnumber].logOut();}
         if (choice==2){admRegister(users, admins);}
+        if (choice==3){cout<<"rent requests"<<endl;}
+        if (choice==4){cout<<"Messages"<<endl;}
+        if(choice==5)
+        {
+            int tempUsrNumber;
+            int confirmation;
+            cout<<"Type in user number"<<endl;
+            cin>>tempUsrNumber;
+            cout<<"Are you sure you want to delete user number "<<tempUsrNumber<<" ?"<<endl;
+            cout<<"Type 1 to confirm"<<endl;
+            cin>>confirmation;
+            if(confirmation==1){users.erase(users.begin()+tempUsrNumber);cout<<"User deleted"<<endl;}
+        }
+        if(choice==6)
+        {
+            int tempAdmNumber;
+            int confirmation;
+            cout<<"Type in admin number"<<endl;
+            cin>>tempAdmNumber;
+            cout<<"Are you sure you want to delete admin number "<<tempAdmNumber<<" ?"<<endl;
+            cout<<"Type 1 to confirm"<<endl;
+            cin>>confirmation;
+            if(confirmation==1){admins.erase(admins.begin()+tempAdmNumber);cout<<"Admin deleted"<<endl;}
+        }
     }
 
 }
@@ -229,7 +257,7 @@ void admRegister(vector <User>& users, vector<Admin>& admins)
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
     cin>>tempPasswd;
-    Admin tempAdmin(users, admins, tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd);
+    Admin tempAdmin(users, admins, tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, true);
     admins.push_back(tempAdmin);
     update_admin_number(admins);
     cout<<"Admin added!"<<endl;
@@ -252,7 +280,7 @@ void registerMenu(vector<User>& users, vector<Admin>& admins)
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
     cin>>tempPasswd;
-    User tempUser(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, users);
+    User tempUser(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, users, true);
     users.push_back(tempUser);
     update_usr_number(users);
     cout<<"User created!"<<endl;
