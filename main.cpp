@@ -172,19 +172,27 @@ void userMenu(vector<User>& users, vector<Admin>& admins)
     cin>>tempPasswd;
     if(users[tempnumber].login(tempPasswd)==true)
     {
-        int choice;
-        cout<<endl;
-        cout<<"USER MENU"<<endl;
-        cout<<"****************"<<endl;
-        cout<<endl;
-        cout<<"1. Log out"<<endl;
-        cout<<"2. Rent a car"<<endl;
-        cout<<"3. List of cars"<<endl;
-        cout<<"4. Message an admin"<<endl;
-        cout<<"5. View messages"<<endl;
-        cin>>choice;
-        if (choice==1) {users[tempnumber].logOut();}
-        if (choice==2){admRegister(users, admins);}
+        if(users[tempnumber].get_active()==false)
+        {
+            cout<<"Your account has been deactivated by ad admin"<<endl;
+            users[tempnumber].logOut();
+        }
+        else
+        {
+            int choice;
+            cout<<endl;
+            cout<<"USER MENU"<<endl;
+            cout<<"****************"<<endl;
+            cout<<endl;
+            cout<<"1. Log out"<<endl;
+            cout<<"2. Rent a car"<<endl;
+            cout<<"3. List of cars"<<endl;
+            cout<<"4. Message an admin"<<endl;
+            cout<<"5. View messages"<<endl;
+            cin>>choice;
+            if (choice==1) {users[tempnumber].logOut();}
+            if (choice==2){admRegister(users, admins);}
+        }
     }
 
 }
@@ -199,43 +207,50 @@ void adminMenu(vector<User>& users, vector<Admin>& admins)
     cin>>tempPasswd;
     if(admins[tempnumber].login(tempPasswd)==true)
     {
-        int choice;
-        cout<<endl;
-        cout<<"ADMIN MENU"<<endl;
-        cout<<"****************"<<endl;
-        cout<<endl;
-        cout<<"1. Log out"<<endl;
-        cout<<"2. Add an admin"<<endl;
-        cout<<"3. View rent requests"<<endl;
-        cout<<"4. View messages"<<endl;
-        cout<<"5. Deactivate an user"<<endl;
-        cout<<"6. Deactivate an admin"<<endl;
-        cin>>choice;
-        if (choice==1) {admins[tempnumber].logOut();}
-        if (choice==2){admRegister(users, admins);}
-        if (choice==3){cout<<"rent requests"<<endl;}
-        if (choice==4){cout<<"Messages"<<endl;}
-        if(choice==5)
+        if(admins[tempnumber].get_active()==false)
         {
-            int tempUsrNumber;
-            int confirmation;
-            cout<<"Type in user number"<<endl;
-            cin>>tempUsrNumber;
-            cout<<"Are you sure you want to delete user number "<<tempUsrNumber<<" ?"<<endl;
-            cout<<"Type 1 to confirm"<<endl;
-            cin>>confirmation;
-            if(confirmation==1){users.erase(users.begin()+tempUsrNumber);cout<<"User deleted"<<endl;}
+            cout<<"Your account has been deactivated by an admin"<<endl;
+            admins[tempnumber].logOut();
         }
-        if(choice==6)
-        {
-            int tempAdmNumber;
-            int confirmation;
-            cout<<"Type in admin number"<<endl;
-            cin>>tempAdmNumber;
-            cout<<"Are you sure you want to delete admin number "<<tempAdmNumber<<" ?"<<endl;
-            cout<<"Type 1 to confirm"<<endl;
-            cin>>confirmation;
-            if(confirmation==1){admins.erase(admins.begin()+tempAdmNumber);cout<<"Admin deleted"<<endl;}
+        else{
+            int choice;
+            cout<<endl;
+            cout<<"ADMIN MENU"<<endl;
+            cout<<"****************"<<endl;
+            cout<<endl;
+            cout<<"1. Log out"<<endl;
+            cout<<"2. Add an admin"<<endl;
+            cout<<"3. View rent requests"<<endl;
+            cout<<"4. View messages"<<endl;
+            cout<<"5. Deactivate an user"<<endl;
+            cout<<"6. Deactivate an admin"<<endl;
+            cin>>choice;
+            if (choice==1) {admins[tempnumber].logOut();}
+            if (choice==2){admRegister(users, admins);}
+            if (choice==3){cout<<"Rent requests"<<endl;}
+            if (choice==4){cout<<"Messages"<<endl;}
+            if(choice==5)
+            {
+                int tempUsrNumber;
+                int confirmation;
+                cout<<"Type in user number"<<endl;
+                cin>>tempUsrNumber;
+                cout<<"Are you sure you want to deactivate user number "<<tempUsrNumber<<" ?"<<endl;
+                cout<<"Type 1 to confirm"<<endl;
+                cin>>confirmation;
+                if(confirmation==1){users[tempUsrNumber].set_active(false); cout<<"User deactivated"<<endl;}
+            }
+            if(choice==6)
+            {
+                int tempAdmNumber;
+                int confirmation;
+                cout<<"Type in admin number"<<endl;
+                cin>>tempAdmNumber;
+                cout<<"Are you sure you want to deactivate admin number "<<tempAdmNumber<<" ?"<<endl;
+                cout<<"Type 1 to confirm"<<endl;
+                cin>>confirmation;
+                if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
+            }
         }
     }
 
