@@ -106,8 +106,10 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
             cin>>choice;
             if (choice==1) {users[tempnumber].logOut();}
             if (choice==2){admRegister(users, admins);}
+            if (choice==3){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
         }
     }
+    else {cout<<"User not found"<<endl;}
 
 }
 
