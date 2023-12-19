@@ -4,6 +4,7 @@
 #include "User.h"
 #include "Admin.h"
 #include "Car.h"
+#include "Rent.h"
 
 using namespace std;
 
@@ -45,6 +46,7 @@ int main(){
     vector<User> users;
     vector<Admin> admins;
     vector<Car> cars;
+    vector<Rent> rents;
     Admin def_admin(users, admins, "def",21,0,"0",false,"1111", true);
     admins.push_back(def_admin);
     update_admin_number(admins);
