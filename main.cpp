@@ -36,7 +36,7 @@ void update_admin_number(vector<Admin>& admins)
 }
 
 void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
-void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
+void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent&> rents);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
@@ -66,7 +66,7 @@ int main(){
         int choice;
         cin>>choice;
         if(choice==1){adminMenu(users, admins, cars);}
-        else if(choice==2){userMenu(users, admins, cars);}
+        else if(choice==2){userMenu(users, admins, cars, rents);}
         else if(choice==3){c=false;}
         else if(choice==4){registerMenu(users, admins);}
         else if(choice==5){rememberUsrNumberMenu(users);}
@@ -78,7 +78,7 @@ int main(){
 
 }
 
-void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
+void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents)
 {   
     int tempnumber;
     cout<<"Type in your user number"<<endl;
@@ -107,7 +107,26 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
             cout<<"5. View messages"<<endl;
             cin>>choice;
             if (choice==1) {users[tempnumber].logOut();}
-            if (choice==2){admRegister(users, admins);}
+            if (choice==2)
+            {
+                string tempstring;
+                int tempChoice;
+                cout<<"Type in a car model you would like to rent: "<<endl;
+                cin>>tempstring;
+                cout<<"Are you sure? 1 for yes, o for no"<<endl;
+                cin>>tempChoice;
+                if(tempChoice==1)
+                {
+                    for(int i=0; i<cars.size(); i++)
+                    {
+                        if(cars[i].get_model()==tempstring)
+                        {
+                            Rent tempRent("notConfirmed", "", users[tempnumber], cars[i]); //DATE
+                            rents.push_back(tempRent);
+                        }
+                    }
+                }
+            }
             if (choice==3){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
         }
     }
