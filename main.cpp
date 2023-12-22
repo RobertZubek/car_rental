@@ -18,6 +18,14 @@ ostream& operator<< (ostream& out, const Car& car)
     return out;
 }
 
+ostream& operator<< (ostream& out, const Rent& rent)
+{
+    out<<"Rent status: "<<rent.get_status()<<endl;
+    out<<"Dates: "<<rent.get_dates()<<endl;
+    out<<"Car: "<<rent.get_car()<<endl;
+    return out;
+}
+
 
 void update_usr_number(vector<User>& users)
 {
@@ -102,18 +110,20 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
             cout<<endl;
             cout<<"1. Log out"<<endl;
             cout<<"2. Rent a car"<<endl;
-            cout<<"3. List of cars"<<endl;
-            cout<<"4. Message an admin"<<endl;
-            cout<<"5. View messages"<<endl;
+            cout<<"3. View your rents"<<endl;
+            cout<<"4. List of cars"<<endl;
             cin>>choice;
             if (choice==1) {users[tempnumber].logOut();}
             if (choice==2)
             {
                 string tempstring;
+                string tempdates;
                 int tempChoice;
                 cout<<"Type in a car model you would like to rent: "<<endl;
                 cin>>tempstring;
-                cout<<"Are you sure? 1 for yes, o for no"<<endl;
+                cout<<"Type dates you are interested in:"<<endl;
+                cin>>tempdates;
+                cout<<"Are you sure? 1 for yes, other for no"<<endl;
                 cin>>tempChoice;
                 if(tempChoice==1)
                 {
@@ -121,13 +131,20 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                     {
                         if(cars[i].get_model()==tempstring)
                         {
-                            Rent tempRent("notConfirmed", "", users[tempnumber], cars[i]); //DATE
+                            Rent tempRent("notConfirmed", tempdates, users[tempnumber], cars[i]); 
                             rents.push_back(tempRent);
                         }
                     }
                 }
             }
-            if (choice==3){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
+            if (choice==3)
+            {
+                for(int i=0; i<rents.size();i++)
+                {
+
+                }
+            }
+            if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
         }
     }
     else {cout<<"User not found"<<endl;}
