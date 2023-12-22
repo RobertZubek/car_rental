@@ -141,7 +141,10 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
             {
                 for(int i=0; i<rents.size();i++)
                 {
-
+                    if(rents[i].get_user_number()==tempnumber)
+                    {
+                        cout<<rents[i];
+                    }
                 }
             }
             if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
