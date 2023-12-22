@@ -44,7 +44,7 @@ void update_admin_number(vector<Admin>& admins)
 }
 
 void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
-void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent&> rents);
+void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
@@ -94,6 +94,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
     string tempPasswd;
     cout<<"Type in your password please"<<endl;
     cin>>tempPasswd;
+    bool c = true;
     if(users[tempnumber].login(tempPasswd)==true)
     {
         if(users[tempnumber].get_active()==false)
@@ -103,51 +104,55 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
         }
         else
         {
-            int choice;
-            cout<<endl;
-            cout<<"USER MENU"<<endl;
-            cout<<"****************"<<endl;
-            cout<<endl;
-            cout<<"1. Log out"<<endl;
-            cout<<"2. Rent a car"<<endl;
-            cout<<"3. View your rents"<<endl;
-            cout<<"4. List of cars"<<endl;
-            cin>>choice;
-            if (choice==1) {users[tempnumber].logOut();}
-            if (choice==2)
+            while(c)
             {
-                string tempstring;
-                string tempdates;
-                int tempChoice;
-                cout<<"Type in a car model you would like to rent: "<<endl;
-                cin>>tempstring;
-                cout<<"Type dates you are interested in:"<<endl;
-                cin>>tempdates;
-                cout<<"Are you sure? 1 for yes, other for no"<<endl;
-                cin>>tempChoice;
-                if(tempChoice==1)
+                int choice;
+                cout<<endl;
+                cout<<"USER MENU"<<endl;
+                cout<<"****************"<<endl;
+                cout<<endl;
+                cout<<"1. Log out"<<endl;
+                cout<<"2. Rent a car"<<endl;
+                cout<<"3. View your rents"<<endl;
+                cout<<"4. List of cars"<<endl;
+                cin>>choice;
+                if (choice==1) {users[tempnumber].logOut(); c= false;}
+                if (choice==2)
                 {
-                    for(int i=0; i<cars.size(); i++)
+                    string tempstring;
+                    string tempdates;
+                    int tempChoice;
+                    cout<<"Type in a car model you would like to rent: "<<endl;
+                    cin>>tempstring;
+                    cout<<"Type dates you are interested in:"<<endl;
+                    cin>>tempdates;
+                    cout<<"Are you sure? 1 for yes, other for no"<<endl;
+                    cin>>tempChoice;
+                    if(tempChoice==1)
                     {
-                        if(cars[i].get_model()==tempstring)
+                        for(int i=0; i<cars.size(); i++)
                         {
-                            Rent tempRent("notConfirmed", tempdates, users[tempnumber], cars[i]); 
-                            rents.push_back(tempRent);
+                            if(cars[i].get_model()==tempstring)
+                            {
+                                Rent tempRent("notConfirmed", tempdates, users[tempnumber], cars[i]); 
+                                rents.push_back(tempRent);
+                            }
                         }
                     }
                 }
-            }
-            if (choice==3)
-            {
-                for(int i=0; i<rents.size();i++)
+                if (choice==3)
                 {
-                    if(rents[i].get_user_number()==tempnumber)
+                    for(int i=0; i<rents.size();i++)
                     {
-                        cout<<rents[i];
+                        if(rents[i].get_user_number()==tempnumber)
+                        {
+                            cout<<rents[i];
+                        }
                     }
                 }
+                if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
+                else {cout<<"Type in correct value"<<endl;}
             }
-            if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
         }
     }
     else {cout<<"User not found"<<endl;}
