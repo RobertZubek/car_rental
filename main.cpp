@@ -23,6 +23,7 @@ ostream& operator<< (ostream& out, const Rent& rent)
     out<<"Rent status: "<<rent.get_status()<<endl;
     out<<"Dates: "<<rent.get_dates()<<endl;
     out<<"Car: "<<rent.get_car()<<endl;
+    out<<"User number: "<<rent.get_user_number()<<endl;
     return out; 
 }
 
@@ -186,6 +187,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 cout<<"1. Log out"<<endl;
                 cout<<"2. Add an admin"<<endl;
                 cout<<"3. View rents"<<endl;
+                cout<<"4. Change rent status"<<endl;
                 cout<<"5. Deactivate an user"<<endl;
                 cout<<"6. Deactivate an admin"<<endl;
                 cout<<"7. Add a car"<<endl;
@@ -193,8 +195,26 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 cin>>choice;
                 if (choice==1) {admins[tempnumber].logOut(); c=false;}
                 if (choice==2){admRegister(users, admins);}
-                if (choice==3){cout<<"Rent requests"<<endl;}
-                if (choice==4){cout<<"Messages"<<endl;}
+                if (choice==3)
+                {
+                    for(int i=0; i<rents.size(); i++)
+                    {
+                        cout<<rents[i];
+                    }   
+                }
+                if (choice==4)
+                {
+                    string tempString;
+                    cout<<"Type in a car model for a rent status change: "<<endl;
+                    cin>>tempString;
+                    for(int i=0; i<rents.size(); i++)
+                    {
+                        if(rents[i].get_car()==tempString)
+                        {
+                            cout<<"Which status you would like to set: "<<endl;
+                        }
+                    }
+                }
                 if(choice==5)
                 {
                     int tempUsrNumber;
