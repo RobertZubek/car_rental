@@ -6,6 +6,7 @@
 #include "Car.h"
 #include "Rent.h"
 
+
 using namespace std;
 
 
@@ -223,9 +224,42 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                             cin>> tempInt;
                             if(isdigit(tempInt))
                             {
-                                if(tempInt==1){rents[i].set_status_accepted();cout<<"Done"<<endl;}
-                                if(tempInt==2){rents[i].set_status_finished();cout<<"Done"<<endl;}
-                                if(tempInt==3){rents[i].set_status_declined();cout<<"Done"<<endl;}
+                                if(tempInt==1)
+                                {
+                                    rents[i].set_status_accepted();
+                                    for(int j=0; j<cars.size();j++)
+                                    {
+                                        if(cars[j].get_model()==tempString)
+                                        {
+                                            cars[j].rent(rents[i].get_user_number());
+                                        }
+                                    }
+                                    cout<<"Done"<<endl;
+                                }
+                                if(tempInt==2)
+                                {
+                                    rents[i].set_status_finished();
+                                    for(int j=0; j<cars.size();j++)
+                                    {
+                                        if(cars[j].get_model()==tempString)
+                                        {
+                                            cars[j].free();
+                                        }
+                                    }
+                                    cout<<"Done"<<endl;
+                                }
+                                if(tempInt==3)
+                                {
+                                    rents[i].set_status_declined();
+                                    for(int j=0; j<cars.size();j++)
+                                    {
+                                        if(cars[j].get_model()==tempString)
+                                        {
+                                            cars[j].free();
+                                        }
+                                    }
+                                    cout<<"Done"<<endl;
+                                }
                             }
                             else{cout<<"Type in correct value"<<endl;}
                         }
