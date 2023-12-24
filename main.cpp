@@ -11,19 +11,23 @@ using namespace std;
 
 ostream& operator<< (ostream& out, const Car& car)
 {
+    out<<"*************************"<<endl;
     out<<"Car model: "<<car.get_model()<<endl;
     out<<"Car status: "<<car.get_status()<<endl;
     out<<"Car description: "<<car.get_description()<<endl;
     out<<"Car price per day: "<<car.get_price()<<endl;
+    out<<"*************************"<<endl;
     return out;
 }
 
 ostream& operator<< (ostream& out, const Rent& rent)
 {
+    out<<"*************************"<<endl;
     out<<"Rent status: "<<rent.get_status()<<endl;
     out<<"Dates: "<<rent.get_dates()<<endl;
     out<<"Car: "<<rent.get_car()<<endl;
     out<<"User number: "<<rent.get_user_number()<<endl;
+    out<<"*************************"<<endl;
     return out; 
 }
 
@@ -211,7 +215,19 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     {
                         if(rents[i].get_car()==tempString)
                         {
+                            int tempInt;
                             cout<<"Which status you would like to set: "<<endl;
+                            cout<<"1. Accepted"<<endl;
+                            cout<<"2. Finished"<<endl;
+                            cout<<"3. Declined"<<endl;
+                            cin>> tempInt;
+                            if(isdigit(tempInt))
+                            {
+                                if(tempInt==1){rents[i].set_status_accepted();cout<<"Done"<<endl;}
+                                if(tempInt==2){rents[i].set_status_finished();cout<<"Done"<<endl;}
+                                if(tempInt==3){rents[i].set_status_declined();cout<<"Done"<<endl;}
+                            }
+                            else{cout<<"Type in correct value"<<endl;}
                         }
                     }
                 }
