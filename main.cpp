@@ -23,7 +23,7 @@ ostream& operator<< (ostream& out, const Rent& rent)
     out<<"Rent status: "<<rent.get_status()<<endl;
     out<<"Dates: "<<rent.get_dates()<<endl;
     out<<"Car: "<<rent.get_car()<<endl;
-    return out;
+    return out; 
 }
 
 
@@ -43,7 +43,7 @@ void update_admin_number(vector<Admin>& admins)
     }
 }
 
-void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars);
+void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents);
 void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
 void rememberUsrNumberMenu(vector<User>& users);
@@ -73,7 +73,7 @@ int main(){
         cout<<"6. Remember your admin number"<<endl;
         int choice;
         cin>>choice;
-        if(choice==1){adminMenu(users, admins, cars);}
+        if(choice==1){adminMenu(users, admins, cars, rents);}
         else if(choice==2){userMenu(users, admins, cars, rents);}
         else if(choice==3){c=false;}
         else if(choice==4){registerMenu(users, admins);}
@@ -159,7 +159,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
 
 }
 
-void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
+void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents)
 {   
     int tempnumber;
     cout<<"Type in your admin number"<<endl;
@@ -176,68 +176,71 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars)
         }
         else{
             int choice;
-            cout<<endl;
-            cout<<"ADMIN MENU"<<endl;
-            cout<<"****************"<<endl;
-            cout<<endl;
-            cout<<"1. Log out"<<endl;
-            cout<<"2. Add an admin"<<endl;
-            cout<<"3. View rent requests"<<endl;
-            cout<<"4. View messages"<<endl;
-            cout<<"5. Deactivate an user"<<endl;
-            cout<<"6. Deactivate an admin"<<endl;
-            cout<<"7. Add a car"<<endl;
-            cout<<"8. See list of cars"<<endl;
-            cin>>choice;
-            if (choice==1) {admins[tempnumber].logOut();}
-            if (choice==2){admRegister(users, admins);}
-            if (choice==3){cout<<"Rent requests"<<endl;}
-            if (choice==4){cout<<"Messages"<<endl;}
-            if(choice==5)
+            bool c = true;
+            while(c)
             {
-                int tempUsrNumber;
-                int confirmation;
-                cout<<"Type in user number"<<endl;
-                cin>>tempUsrNumber;
-                cout<<"Are you sure you want to deactivate user number "<<tempUsrNumber<<" ?"<<endl;
-                cout<<"Type 1 to confirm"<<endl;
-                cin>>confirmation;
-                if(confirmation==1){users[tempUsrNumber].set_active(false); cout<<"User deactivated"<<endl;}
-            }
-            if(choice==6)
-            {
-                int tempAdmNumber;
-                int confirmation;
-                cout<<"Type in admin number"<<endl;
-                cin>>tempAdmNumber;
-                cout<<"Are you sure you want to deactivate admin number "<<tempAdmNumber<<" ?"<<endl;
-                cout<<"Type 1 to confirm"<<endl;
-                cin>>confirmation;
-                if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
-            }
-            if(choice==7)
-            {
-                string tempModel;
-                string tempStatus;
-                string tempDescription;
-                float tempPrice;
-                cout<<"Type in car model: "<<endl;
-                cin>>tempModel;
-                cout<<"Type in car status: "<<endl;
-                cin>>tempStatus;
-                cout<<"Type in car description: "<<endl;
-                cin>>tempDescription;
-                cout<<"Type in car rental price per day:"<<endl;
-                cin>>tempPrice;
-                Car tempCar(tempStatus, tempModel, tempDescription, tempPrice);
-                cars.push_back(tempCar);
-                cout<<"Car added!"<<endl;
-            }
-            if(choice==8)
-            {
-                for(int i=0;i<cars.size();i++)
+                cout<<endl;
+                cout<<"ADMIN MENU"<<endl;
+                cout<<"****************"<<endl;
+                cout<<endl;
+                cout<<"1. Log out"<<endl;
+                cout<<"2. Add an admin"<<endl;
+                cout<<"3. View rents"<<endl;
+                cout<<"5. Deactivate an user"<<endl;
+                cout<<"6. Deactivate an admin"<<endl;
+                cout<<"7. Add a car"<<endl;
+                cout<<"8. See list of cars"<<endl;
+                cin>>choice;
+                if (choice==1) {admins[tempnumber].logOut(); c=false;}
+                if (choice==2){admRegister(users, admins);}
+                if (choice==3){cout<<"Rent requests"<<endl;}
+                if (choice==4){cout<<"Messages"<<endl;}
+                if(choice==5)
                 {
-                    cout<<cars[i];
+                    int tempUsrNumber;
+                    int confirmation;
+                    cout<<"Type in user number"<<endl;
+                    cin>>tempUsrNumber;
+                    cout<<"Are you sure you want to deactivate user number "<<tempUsrNumber<<" ?"<<endl;
+                    cout<<"Type 1 to confirm"<<endl;
+                    cin>>confirmation;
+                    if(confirmation==1){users[tempUsrNumber].set_active(false); cout<<"User deactivated"<<endl;}
+                }
+                if(choice==6)
+                {
+                    int tempAdmNumber;
+                    int confirmation;
+                    cout<<"Type in admin number"<<endl;
+                    cin>>tempAdmNumber;
+                    cout<<"Are you sure you want to deactivate admin number "<<tempAdmNumber<<" ?"<<endl;
+                    cout<<"Type 1 to confirm"<<endl;
+                    cin>>confirmation;
+                    if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
+                }
+                if(choice==7)
+                {
+                    string tempModel;
+                    string tempStatus;
+                    string tempDescription;
+                    float tempPrice;
+                    cout<<"Type in car model: "<<endl;
+                    cin>>tempModel;
+                    cout<<"Type in car status: "<<endl;
+                    cin>>tempStatus;
+                    cout<<"Type in car description: "<<endl;
+                    cin>>tempDescription;
+                    cout<<"Type in car rental price per day:"<<endl;
+                    cin>>tempPrice;
+                    Car tempCar(tempStatus, tempModel, tempDescription, tempPrice);
+                    cars.push_back(tempCar);
+                    cout<<"Car added!"<<endl;
+                }
+                if(choice==8)
+                {
+                    for(int i=0;i<cars.size();i++)
+                    {
+                        cout<<cars[i];
+                    }
                 }
             }
         }
