@@ -97,6 +97,8 @@ void admRegister(vector<User>& users, vector<Admin>& admins);
 int main(){
     adminSaver adminSave;
     userSaver userSave;
+    carSaver carSave;
+    rentSaver rentSave;
     
     vector<User> users;
     vector<Admin> admins;
@@ -122,7 +124,14 @@ int main(){
         cin>>choice;
         if(choice==1){adminMenu(users, admins, cars, rents);}
         else if(choice==2){userMenu(users, admins, cars, rents);}
-        else if(choice==3){c=false;}
+        else if(choice==3)
+        {
+            userSave.save(users);
+            carSave.save(cars);
+            adminSave.save(admins);
+            rentSave.save(rents);
+            c=false;
+        }
         else if(choice==4){registerMenu(users, admins);}
         else if(choice==5){rememberUsrNumberMenu(users);}
         else if(choice==6){rememberAdmNumberMenu(admins);}
