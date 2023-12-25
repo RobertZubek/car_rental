@@ -263,26 +263,26 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 if (choice==4)
                 {
-                    string tempString;
-                    cout<<"Type in a car model for a rent status change: "<<endl;
-                    cin>>tempString;
+                    int tempInt;
+                    cout<<"Type in a rent number for status change: "<<endl;
+                    cin>>tempInt;
                     for(int i=0; i<rents.size(); i++)
                     {
-                        if(rents[i].get_car()==tempString)
+                        if(rents[i].get_number()==tempInt)
                         {
-                            int tempInt;
+                            int tempInt1;
                             cout<<"Which status you would like to set: "<<endl;
                             cout<<"1. Accepted"<<endl;
                             cout<<"2. Finished"<<endl;
                             cout<<"3. Declined"<<endl;
-                            cin>> tempInt;
+                            cin>> tempInt1;
                            
-                                if(tempInt==1)
+                                if(tempInt1==1)
                                 {
                                     rents[i].set_status_accepted();
                                     for(int j=0; j<cars.size();j++)
                                     {
-                                        if(cars[j].get_model()==tempString)
+                                        if(cars[j].get_model()==rents[i].get_car())
                                         {
                                             cars[j].rent(rents[i].get_user_number());
                                         }

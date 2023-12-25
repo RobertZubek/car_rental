@@ -29,7 +29,7 @@ public:
     string get_description(void)const{return fdescription;}
     float get_price(void)const{return fprice;}
 
-    void rent(int number){fstatus="Rented by user number: "+to_string(number);}
+    void rent(int number){fstatus="Rented_by_user_number_"+to_string(number);}
     
 
     void free() {fstatus="avaiable";}
