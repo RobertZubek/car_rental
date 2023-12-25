@@ -53,6 +53,7 @@ ostream& operator<< (ostream& out, const Car& car)
 ostream& operator<< (ostream& out, const Rent& rent)
 {
     out<<"*************************"<<endl;
+    out<<"Rent number: "<<rent.get_number()<<endl;
     out<<"Rent status: "<<rent.get_status()<<endl;
     out<<"Dates: "<<rent.get_dates()<<endl;
     out<<"Car: "<<rent.get_car()<<endl;
@@ -75,6 +76,13 @@ void update_admin_number(vector<Admin>& admins)
     for(int i=0;i<=admins.size();i++)
     {
         admins[i].set_number(i);
+    }
+}
+void update_rent_number(vector<Rent>& rents)
+{
+    for(int i=0; i<=rents.size(); i++ )
+    {
+        rents[i].set_number(i);
     }
 }
 
@@ -172,8 +180,10 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                         {
                             if(cars[i].get_model()==tempstring)
                             {
-                                Rent tempRent("notConfirmed", tempdates, users[tempnumber], cars[i]); 
+                                Rent tempRent("notConfirmed", tempdates,tempnumber, cars[i].get_model(), 0); 
                                 rents.push_back(tempRent);
+                                update_rent_number(rents);
+                                cout<<"Your rent number: "<<rents[rents.size()-1].get_number()<<endl;
                             }
                         }
                     }
