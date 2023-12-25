@@ -9,6 +9,32 @@
 
 using namespace std;
 
+ostream& operator<< (ostream& out, const User& user)
+{
+    out<<"*************************"<<endl;
+    out<<"User name: "<<user.get_name()<<endl;
+    out<<"User number: "<<user.get_number()<<endl;
+    out<<"User age: "<<user.get_age()<<endl;
+    out<<"User status: ";
+    if(user.get_active()){cout<<"active"<<endl;}else{cout<<"deactivated"<<endl;}
+    out<<"User pesel: "<<user.get_pesel()<<endl;
+    out<<"User document number: "<<user.get_document_number()<<endl;
+    out<<"*************************"<<endl;
+    return out;
+}
+ostream& operator<< (ostream& out, const Admin& admin)
+{
+    out<<"*************************"<<endl;
+    out<<"Admin name: "<<admin.get_name()<<endl;
+    out<<"Admin number: "<<admin.get_number()<<endl;
+    out<<"Admin age: "<<admin.get_age()<<endl;
+    out<<"Admin status: ";
+    if(admin.get_active()){cout<<"active"<<endl;}else{cout<<"deactivated"<<endl;}
+    out<<"Admin pesel: "<<admin.get_pesel()<<endl;
+    out<<"Admin document number: "<<admin.get_document_number()<<endl;
+    out<<"*************************"<<endl;
+    return out;
+}
 
 ostream& operator<< (ostream& out, const Car& car)
 {
@@ -197,6 +223,8 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 cout<<"6. Deactivate an admin"<<endl;
                 cout<<"7. Add a car"<<endl;
                 cout<<"8. See list of cars"<<endl;
+                cout<<"9. See list of users"<<endl;
+                cout<<"10. See list of admins"<<endl;
                 cin>>choice;
                 if (choice==1) {admins[tempnumber].logOut(); c=false;}
                 if (choice==2){admRegister(users, admins);}
@@ -222,8 +250,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                             cout<<"2. Finished"<<endl;
                             cout<<"3. Declined"<<endl;
                             cin>> tempInt;
-                            if(isdigit(tempInt))
-                            {
+                           
                                 if(tempInt==1)
                                 {
                                     rents[i].set_status_accepted();
@@ -260,8 +287,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     }
                                     cout<<"Done"<<endl;
                                 }
-                            }
-                            else{cout<<"Type in correct value"<<endl;}
+                            
                         }
                     }
                 }
@@ -310,6 +336,20 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     for(int i=0;i<cars.size();i++)
                     {
                         cout<<cars[i];
+                    }
+                }
+                if(choice==9)
+                {
+                    for(int i=0;i<users.size(); i++)
+                    {
+                        cout<<users[i];
+                    }
+                }
+                if(choice==10)
+                {
+                    for(int i=0;i<admins.size();i++)
+                    {
+                        cout<<admins[i];
                     }
                 }
             }
