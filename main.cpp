@@ -7,6 +7,7 @@
 #include "Rent.h"
 #include "userSaver.h"
 #include "adminSaver.h"
+#include "carSaver.h"
 
 
 using namespace std;
@@ -85,6 +86,9 @@ void rememberAdmNumberMenu(vector<Admin>& admins);
 void admRegister(vector<User>& users, vector<Admin>& admins);
 
 int main(){
+    adminSaver adminSave;
+    userSaver userSave;
+    
     vector<User> users;
     vector<Admin> admins;
     vector<Car> cars;
