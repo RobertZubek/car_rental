@@ -5,6 +5,8 @@
 #include "Admin.h"
 #include "Car.h"
 #include "Rent.h"
+#include "userSaver.h"
+#include "adminSaver.h"
 
 
 using namespace std;
@@ -87,7 +89,7 @@ int main(){
     vector<Admin> admins;
     vector<Car> cars;
     vector<Rent> rents;
-    Admin def_admin(users, admins, "def",21,0,"0",false,"1111", true);
+    Admin def_admin( "def",21,0,"0",false,"1111", true);
     admins.push_back(def_admin);
     update_admin_number(admins);
     bool c=true;
@@ -374,7 +376,7 @@ void admRegister(vector <User>& users, vector<Admin>& admins)
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
     cin>>tempPasswd;
-    Admin tempAdmin(users, admins, tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, true);
+    Admin tempAdmin(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, true);
     admins.push_back(tempAdmin);
     update_admin_number(admins);
     cout<<"Admin added!"<<endl;
@@ -397,7 +399,7 @@ void registerMenu(vector<User>& users, vector<Admin>& admins)
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
     cin>>tempPasswd;
-    User tempUser(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, users, true);
+    User tempUser(tempName, tempAge, tempPesel, tempDocNumber, false, tempPasswd, true);
     users.push_back(tempUser);
     update_usr_number(users);
     cout<<"User created!"<<endl;

@@ -11,11 +11,10 @@ private:
     bool flogged;
     string fpassword;
     int fnumber;
-    vector<User>& fusers;
     bool factive;
 public:
     ~User()=default;
-    User(string name, int age, int pesel, string document_number, bool logged, string password, vector<User>& users, bool active):fusers(users)
+    User(string name, int age, int pesel, string document_number, bool logged, string password, bool active)
     {
         fname = name;
         fage=age;
