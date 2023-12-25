@@ -8,6 +8,7 @@
 #include "userSaver.h"
 #include "adminSaver.h"
 #include "carSaver.h"
+#include "rentSaver.h"
 
 
 using namespace std;

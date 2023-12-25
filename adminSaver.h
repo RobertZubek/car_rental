@@ -19,7 +19,7 @@ void save(vector<Admin>& admins)
                     file << endl;
                 }
                 file.close();
-                cout << "Vector of objects saved to vector.txt" << endl;
+                cout << "Vector of admins saved to admins.txt" << endl;
             }
             else
             {

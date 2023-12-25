@@ -4,21 +4,21 @@
 
 using namespace std;
 
-class carSaver
+class rentSaver
 {
 private:
 public:
-void save(vector<Car>& cars)
+void save(vector<Rent>& rents)
 {
-    ofstream file("cars.txt");
+    ofstream file("rents.txt");
             if (file.is_open()) {
-                for (auto& obj : cars)
+                for (auto& obj : rents)
                 {
-                    file << obj.get_status()<<" "<<obj.get_model()<<" "<<obj.get_description()<<" "<<obj.get_price()<<" ";
+                    file << obj.get_status()<<" "<<obj.get_dates()<<" "<<obj.get_user_number()<<" "<<obj.get_car()<<" "<<obj.get_number()<<" ";
                     file << endl;
                 }
                 file.close();
-                cout << "Vector of cars saved to cars.txt" << endl;
+                cout << "Vector of rents saved to rents.txt" << endl;
             }
             else
             {

@@ -19,7 +19,7 @@ void save(vector<User>& users)
                     file << endl;
                 }
                 file.close();
-                cout << "Vector of objects saved to vector.txt" << endl;
+                cout << "Vector of users saved to user.txt" << endl;
             }
             else
             {
