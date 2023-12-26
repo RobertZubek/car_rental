@@ -294,7 +294,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     rents[i].set_status_finished();
                                     for(int j=0; j<cars.size();j++)
                                     {
-                                        if(cars[j].get_model()==tempString)
+                                        if(cars[j].get_model()==rents[i].get_car())
                                         {
                                             cars[j].free();
                                         }
@@ -306,7 +306,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     rents[i].set_status_declined();
                                     for(int j=0; j<cars.size();j++)
                                     {
-                                        if(cars[j].get_model()==tempString)
+                                        if(cars[j].get_model()==rents[i].get_car())
                                         {
                                             cars[j].free();
                                         }
