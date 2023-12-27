@@ -66,7 +66,7 @@ ostream& operator<< (ostream& out, const Rent& rent)
 
 void update_usr_number(vector<User>& users)
 {
-    for(int i=0;i<=users.size();i++)
+    for(int i=0;i<users.size();i++)
     {
         users[i].set_number(i);
     }
@@ -74,14 +74,14 @@ void update_usr_number(vector<User>& users)
 
 void update_admin_number(vector<Admin>& admins)
 {
-    for(int i=0;i<=admins.size();i++)
+    for(int i=0;i<admins.size();i++)
     {
         admins[i].set_number(i);
     }
 }
 void update_rent_number(vector<Rent>& rents)
 {
-    for(int i=0; i<=rents.size(); i++ )
+    for(int i=0; i<rents.size(); i++ )
     {
         rents[i].set_number(i);
     }
@@ -101,6 +101,8 @@ int main(){
     rentSaver rentSave;
     
     vector<User> users;
+    userSave.read(users);
+    update_usr_number(users);
     vector<Admin> admins;
     vector<Car> cars;
     vector<Rent> rents;

@@ -52,6 +52,7 @@ vector<User> read(vector<User>& users)
     else {
         cout << "Failed to open users.txt" << endl;
     }
+    return users;
     
 }
 };
