@@ -26,7 +26,6 @@ void save(vector<User>& users)
                 cout << "Failed to open txt file" << endl;
             }
 }
-};
 
 vector<User> read(vector<User>& users)
 {
@@ -55,3 +54,5 @@ vector<User> read(vector<User>& users)
     }
     
 }
+};
+
