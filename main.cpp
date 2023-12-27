@@ -99,11 +99,12 @@ int main(){
     userSaver userSave;
     carSaver carSave;
     rentSaver rentSave;
-    
     vector<User> users;
     userSave.read(users);
     update_usr_number(users);
     vector<Admin> admins;
+    adminSave.read(admins);
+    update_admin_number(admins);
     vector<Car> cars;
     vector<Rent> rents;
     Admin def_admin( "def",21,0,"0",false,"1111", true);
