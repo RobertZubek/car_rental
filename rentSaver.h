@@ -25,4 +25,30 @@ void save(vector<Rent>& rents)
                 cout << "Failed to open txt file" << endl;
             }
 }
+
+vector<Rent> read(vector<Rent>& rents)
+{
+    ifstream file("rents.txt");
+    if (file.is_open()) {
+        string line;
+        while (getline(file, line)) {
+            stringstream ss(line);
+            string status;
+            string dates;
+            int uNumber;
+            string car;
+            int number;
+            ss >> status >> dates>>uNumber>>car>>number;
+            Rent obj(status, dates, uNumber, car, number);
+            rents.push_back(obj);
+        }
+        file.close();
+        cout << "Vector of objects loaded from rents.txt" << endl;
+    }
+    else {
+        cout << "Failed to open rents.txt" << endl;
+    }
+    return rents;
+    
+}
 };
