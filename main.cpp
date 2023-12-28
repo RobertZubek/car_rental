@@ -112,6 +112,8 @@ int main(){
     carSave.read(cars);
 
     vector<Rent> rents;
+    rentSave.read(rents);
+    update_rent_number(rents);
     
     
     bool c=true;
