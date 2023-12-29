@@ -403,6 +403,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 else if(choice==7)
                 {
+                    //adding a new car
                     string tempModel;
                     string tempStatus;
                     string tempDescription;
@@ -420,6 +421,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     cout<<"Car added!"<<endl;
                 }
                 else if(choice==8)
+                // viewing all cars
                 {
                     for(int i=0;i<cars.size();i++)
                     {
@@ -428,6 +430,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 else if(choice==9)
                 {
+                //viewing all users
                     for(int i=0;i<users.size(); i++)
                     {
                         cout<<users[i];
@@ -435,6 +438,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 else if(choice==10)
                 {
+                //viewing all admins
                     for(int i=0;i<admins.size();i++)
                     {
                         cout<<admins[i];
@@ -446,6 +450,8 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
     }
 
 }
+
+//adding new admin
 void admRegister(vector <User>& users, vector<Admin>& admins)
 {   
     string tempName;
@@ -467,8 +473,10 @@ void admRegister(vector <User>& users, vector<Admin>& admins)
     admins.push_back(tempAdmin);
     update_admin_number(admins);
     cout<<"Admin added!"<<endl;
-    cout<<"Your admin number is "<<admins.size()-1<<endl;
+    cout<<"Your admin number is "<<admins.size()-1<<endl; //viewing admin number
 }
+
+//adding new user, they can do that themselves
 void registerMenu(vector<User>& users, vector<Admin>& admins)
 {   
     string tempName;
@@ -493,6 +501,7 @@ void registerMenu(vector<User>& users, vector<Admin>& admins)
     cout<<"Your user number is "<<users.size()-1<<endl;
 }
 
+//displaying user number in case someone forgot
 void rememberUsrNumberMenu(vector<User>& users)
 {
     string tempstring;
@@ -507,6 +516,7 @@ void rememberUsrNumberMenu(vector<User>& users)
     else {cout<<"Your user number is: "<<number<<endl;}
 }
 
+//displaying admin number in case someone forgot
 void rememberAdmNumberMenu(vector<Admin>& admins)
 {
     string tempstring;
