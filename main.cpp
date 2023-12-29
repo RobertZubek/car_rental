@@ -116,6 +116,7 @@ int main(){
     carSaver carSave;
     rentSaver rentSave;
 
+    //creating vectors of objects and reading data into them
     vector<User> users;
     userSave.read(users);
     update_usr_number(users);
@@ -131,7 +132,7 @@ int main(){
     rentSave.read(rents);
     update_rent_number(rents);
     
-    
+    //main menu
     bool c=true;
     while(c)
     {
@@ -147,10 +148,12 @@ int main(){
         cout<<"6. Remember your admin number"<<endl;
         int choice;
         validate(choice);
+        //calling different functions based on user input
         if(choice==1){adminMenu(users, admins, cars, rents);}
         else if(choice==2){userMenu(users, admins, cars, rents);}
         else if(choice==3)
         {
+            //saving all the data and escaping program
             userSave.save(users);
             carSave.save(cars);
             adminSave.save(admins);
@@ -166,9 +169,10 @@ int main(){
     
 
 }
-
+//user menu
 void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents)
 {   
+    //logging an user
     int tempnumber;
     cout<<"Type in your user number"<<endl;
     cin>>tempnumber;
@@ -178,6 +182,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
     bool c = true;
     if(users[tempnumber].login(tempPasswd)==true)
     {
+        //checking whether user is active
         if(users[tempnumber].get_active()==false)
         {
             cout<<"Your account has been deactivated by ad admin"<<endl;
@@ -187,6 +192,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
         {
             while(c)
             {
+                //proper user menu
                 int choice;
                 cout<<endl;
                 cout<<"USER MENU"<<endl;
