@@ -218,10 +218,12 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                     cin>>tempChoice;
                     if(tempChoice==1)
                     {
+                        //looking fot a wanted car
                         for(int i=0; i<cars.size(); i++)
                         {
                             if(cars[i].get_model()==tempstring)
                             {
+                                //creating a not confirmed rent
                                 Rent tempRent("notConfirmed", tempdates,tempnumber, cars[i].get_model(), 0); 
                                 rents.push_back(tempRent);
                                 update_rent_number(rents);
@@ -233,6 +235,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                 }
                 else if (choice==3)
                 {
+                    // viewing rents only made by current user
                     for(int i=0; i<rents.size();i++)
                     {
                         if(rents[i].get_user_number()==tempnumber)
@@ -241,31 +244,38 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                         }
                     }
                 }
+                //viewing all cars
                 else if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
                 else {cout<<"Type in correct value"<<endl;}
             }
         }
     }
+    //if wrong number provided
     else {cout<<"User not found"<<endl;}
 
 }
 
+//admin menu
 void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents)
 {   
+    //logging an admin
     int tempnumber;
     cout<<"Type in your admin number"<<endl;
     cin>>tempnumber;
     string tempPasswd;
     cout<<"Type in your password please"<<endl;
     cin>>tempPasswd;
+    //logging in
     if(admins[tempnumber].login(tempPasswd)==true)
     {
+        //checking if admin is active
         if(admins[tempnumber].get_active()==false)
         {
             cout<<"Your account has been deactivated by an admin"<<endl;
             admins[tempnumber].logOut();
         }
         else{
+            //proper menu
             int choice;
             bool c = true;
             while(c)
@@ -285,10 +295,11 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 cout<<"9. See list of users"<<endl;
                 cout<<"10. See list of admins"<<endl;
                 validate(choice);
-                if (choice==1) {admins[tempnumber].logOut(); c=false;}
-                else if (choice==2){admRegister(users, admins);}
+                if (choice==1) {admins[tempnumber].logOut(); c=false;} //logging out
+                else if (choice==2){admRegister(users, admins);} //admin can add other admins
                 else if (choice==3)
                 {
+                    //viewing all rents made by users
                     for(int i=0; i<rents.size(); i++)
                     {
                         cout<<rents[i];
@@ -296,64 +307,69 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 else if (choice==4)
                 {
+                    //changing status of a rent
                     int tempInt;
                     cout<<"Type in a rent number for status change: "<<endl;
                     validate(tempInt);
-                    if(tempInt<0 || tempInt>=rents.size())
-                    for(int i=0; i<rents.size(); i++)
+                    if(tempInt<0 || tempInt>=rents.size())//validating number
                     {
-                        if(rents[i].get_number()==tempInt)
+                        for(int i=0; i<rents.size(); i++)
                         {
-                            int tempInt1;
-                            cout<<"Which status you would like to set: "<<endl;
-                            cout<<"1. Accepted"<<endl;
-                            cout<<"2. Finished"<<endl;
-                            cout<<"3. Declined"<<endl;
-                            validate(tempInt1);
-                           
-                                if(tempInt1==1)
-                                {
-                                    rents[i].set_status_accepted();
-                                    for(int j=0; j<cars.size();j++)
-                                    {
-                                        if(cars[j].get_model()==rents[i].get_car())
-                                        {
-                                            cars[j].rent(rents[i].get_user_number());
-                                        }
-                                    }
-                                    cout<<"Done"<<endl;
-                                }
-                                else if(tempInt==2)
-                                {
-                                    rents[i].set_status_finished();
-                                    for(int j=0; j<cars.size();j++)
-                                    {
-                                        if(cars[j].get_model()==rents[i].get_car())
-                                        {
-                                            cars[j].free();
-                                        }
-                                    }
-                                    cout<<"Done"<<endl;
-                                }
-                                else if(tempInt==3)
-                                {
-                                    rents[i].set_status_declined();
-                                    for(int j=0; j<cars.size();j++)
-                                    {
-                                        if(cars[j].get_model()==rents[i].get_car())
-                                        {
-                                            cars[j].free();
-                                        }
-                                    }
-                                    cout<<"Done"<<endl;
-                                }
-                                else {cout<<"Type in correct value"<<endl;}
+                            if(rents[i].get_number()==tempInt)
+                            {
+                                int tempInt1;
+                                cout<<"Which status you would like to set: "<<endl;//asking for a new status
+                                cout<<"1. Accepted"<<endl;
+                                cout<<"2. Finished"<<endl;
+                                cout<<"3. Declined"<<endl;
+                                validate(tempInt1);
                             
+                                    if(tempInt1==1)
+                                    {
+                                        rents[i].set_status_accepted();
+                                        for(int j=0; j<cars.size();j++)
+                                        {
+                                            if(cars[j].get_model()==rents[i].get_car())
+                                            {
+                                                cars[j].rent(rents[i].get_user_number());
+                                            }
+                                        }
+                                        cout<<"Done"<<endl;
+                                    }
+                                    else if(tempInt==2)
+                                    {
+                                        rents[i].set_status_finished();
+                                        for(int j=0; j<cars.size();j++)
+                                        {
+                                            if(cars[j].get_model()==rents[i].get_car())
+                                            {
+                                                cars[j].free();
+                                            }
+                                        }
+                                        cout<<"Done"<<endl;
+                                    }
+                                    else if(tempInt==3)
+                                    {
+                                        rents[i].set_status_declined();
+                                        for(int j=0; j<cars.size();j++)
+                                        {
+                                            if(cars[j].get_model()==rents[i].get_car())
+                                            {
+                                                cars[j].free();
+                                            }
+                                        }
+                                        cout<<"Done"<<endl;
+                                    }
+                                    else {cout<<"Type in correct value"<<endl;}
+                                
+                            }
                         }
                     }
+                    else {cout<<"Type in correct value"<<endl;}
                 }
                 else if(choice==5)
                 {
+                    //deactivating user
                     int tempUsrNumber;
                     int confirmation;
                     cout<<"Type in user number"<<endl;
@@ -370,6 +386,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 }
                 else if(choice==6)
                 {
+                    //deactivating admin
                     int tempAdmNumber;
                     int confirmation;
                     cout<<"Type in admin number"<<endl;
