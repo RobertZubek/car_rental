@@ -362,11 +362,16 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     int tempAdmNumber;
                     int confirmation;
                     cout<<"Type in admin number"<<endl;
-                    cin>>tempAdmNumber;
-                    cout<<"Are you sure you want to deactivate admin number "<<tempAdmNumber<<" ?"<<endl;
-                    cout<<"Type 1 to confirm"<<endl;
-                    cin>>confirmation;
-                    if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
+                    validate(tempAdmNumber);
+                    if(tempAdmNumber>=0&&tempAdmNumber<admins.size())
+                    {
+                        cout<<"Are you sure you want to deactivate admin number "<<tempAdmNumber<<" ?"<<endl;
+                        cout<<"Type 1 to confirm"<<endl;
+                        validate(confirmation);
+                        if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
+                        else {cout<<"Action aborted"<<endl;}
+                    }
+                    else{cout<<"Invalid admin number"<<endl;}
                 }
                 else if(choice==7)
                 {
@@ -381,7 +386,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     cout<<"Type in car description: "<<endl;
                     cin>>tempDescription;
                     cout<<"Type in car rental price per day:"<<endl;
-                    cin>>tempPrice;
+                    validate(tempPrice);
                     Car tempCar(tempStatus, tempModel, tempDescription, tempPrice);
                     cars.push_back(tempCar);
                     cout<<"Car added!"<<endl;
