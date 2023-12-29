@@ -203,9 +203,10 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                 cout<<"3. View your rents"<<endl;
                 cout<<"4. List of cars"<<endl;
                 validate(choice);
-                if (choice==1) {users[tempnumber].logOut(); c= false;}
-                else if (choice==2)
+                if (choice==1) {users[tempnumber].logOut(); c= false;} // logging out 
+                else if (choice==2) // renting a car
                 {
+                    //collecting data
                     string tempstring;
                     string tempdates;
                     int tempChoice;
@@ -226,6 +227,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                                 update_rent_number(rents);
                                 cout<<"Your rent number: "<<rents[rents.size()-1].get_number()<<endl;
                             }
+                            else {cout<<"No car in service: "<<tempstring<<endl;}
                         }
                     }
                 }
