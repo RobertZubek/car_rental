@@ -20,8 +20,9 @@ void validate(T &input)
 {
      while (!(std::cin >> input)) {
         cin.clear(); // Clear error flags
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
-        cout << "Invalid input. Please enter a correct value: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+        cout << "Invalid input. Please enter a correct value: "<<endl;
+        
     }
 }
 
@@ -142,7 +143,6 @@ int main(){
         cout<<"5. Remember your user number"<<endl;
         cout<<"6. Remember your admin number"<<endl;
         int choice;
-        cin>>choice;
         validate(choice);
         if(choice==1){adminMenu(users, admins, cars, rents);}
         else if(choice==2){userMenu(users, admins, cars, rents);}
@@ -193,7 +193,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                 cout<<"2. Rent a car"<<endl;
                 cout<<"3. View your rents"<<endl;
                 cout<<"4. List of cars"<<endl;
-                cin>>choice;
+                validate(choice);
                 if (choice==1) {users[tempnumber].logOut(); c= false;}
                 else if (choice==2)
                 {
@@ -273,21 +273,22 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                 cout<<"8. See list of cars"<<endl;
                 cout<<"9. See list of users"<<endl;
                 cout<<"10. See list of admins"<<endl;
-                cin>>choice;
+                validate(choice);
                 if (choice==1) {admins[tempnumber].logOut(); c=false;}
-                if (choice==2){admRegister(users, admins);}
-                if (choice==3)
+                else if (choice==2){admRegister(users, admins);}
+                else if (choice==3)
                 {
                     for(int i=0; i<rents.size(); i++)
                     {
                         cout<<rents[i];
                     }   
                 }
-                if (choice==4)
+                else if (choice==4)
                 {
                     int tempInt;
                     cout<<"Type in a rent number for status change: "<<endl;
-                    cin>>tempInt;
+                    validate(tempInt);
+                    if(tempInt<0 || tempInt>=rents.size())
                     for(int i=0; i<rents.size(); i++)
                     {
                         if(rents[i].get_number()==tempInt)
@@ -297,7 +298,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                             cout<<"1. Accepted"<<endl;
                             cout<<"2. Finished"<<endl;
                             cout<<"3. Declined"<<endl;
-                            cin>> tempInt1;
+                            validate(tempInt1);
                            
                                 if(tempInt1==1)
                                 {
@@ -311,7 +312,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     }
                                     cout<<"Done"<<endl;
                                 }
-                                if(tempInt==2)
+                                else if(tempInt==2)
                                 {
                                     rents[i].set_status_finished();
                                     for(int j=0; j<cars.size();j++)
@@ -323,7 +324,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     }
                                     cout<<"Done"<<endl;
                                 }
-                                if(tempInt==3)
+                                else if(tempInt==3)
                                 {
                                     rents[i].set_status_declined();
                                     for(int j=0; j<cars.size();j++)
@@ -335,22 +336,28 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                                     }
                                     cout<<"Done"<<endl;
                                 }
+                                else {cout<<"Type in correct value"<<endl;}
                             
                         }
                     }
                 }
-                if(choice==5)
+                else if(choice==5)
                 {
                     int tempUsrNumber;
                     int confirmation;
                     cout<<"Type in user number"<<endl;
-                    cin>>tempUsrNumber;
-                    cout<<"Are you sure you want to deactivate user number "<<tempUsrNumber<<" ?"<<endl;
-                    cout<<"Type 1 to confirm"<<endl;
-                    cin>>confirmation;
-                    if(confirmation==1){users[tempUsrNumber].set_active(false); cout<<"User deactivated"<<endl;}
+                    validate(tempUsrNumber);
+                    if(tempUsrNumber>=0&&tempUsrNumber<users.size())
+                    {
+                        cout<<"Are you sure you want to deactivate user number "<<tempUsrNumber<<" ?"<<endl;
+                        cout<<"Type 1 to confirm"<<endl;
+                        validate(confirmation);
+                        if(confirmation==1){users[tempUsrNumber].set_active(false); cout<<"User deactivated"<<endl;}
+                        else {cout<<"Action aborted"<<endl;}
+                    }
+                    else {cout<<"Invalid user number"<<endl;}
                 }
-                if(choice==6)
+                else if(choice==6)
                 {
                     int tempAdmNumber;
                     int confirmation;
@@ -361,7 +368,7 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     cin>>confirmation;
                     if(confirmation==1){admins[tempAdmNumber].set_active(false); cout<<"Admin deactivated"<<endl;}
                 }
-                if(choice==7)
+                else if(choice==7)
                 {
                     string tempModel;
                     string tempStatus;
@@ -379,27 +386,28 @@ void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, ve
                     cars.push_back(tempCar);
                     cout<<"Car added!"<<endl;
                 }
-                if(choice==8)
+                else if(choice==8)
                 {
                     for(int i=0;i<cars.size();i++)
                     {
                         cout<<cars[i];
                     }
                 }
-                if(choice==9)
+                else if(choice==9)
                 {
                     for(int i=0;i<users.size(); i++)
                     {
                         cout<<users[i];
                     }
                 }
-                if(choice==10)
+                else if(choice==10)
                 {
                     for(int i=0;i<admins.size();i++)
                     {
                         cout<<admins[i];
                     }
                 }
+                else {cout<<"Type in correct value:"<<endl;}
             }
         }
     }
@@ -415,9 +423,9 @@ void admRegister(vector <User>& users, vector<Admin>& admins)
     cout<<"Type in your name:"<<endl;
     cin>>tempName;
     cout<<"Type in your age:"<<endl;
-    cin>>tempAge;
+    validate(tempAge);
     cout<<"Type in your Pesel:"<<endl;
-    cin>>tempPesel;
+    validate(tempPesel);
     cout<<"Type in your document number:"<<endl;
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
@@ -438,9 +446,9 @@ void registerMenu(vector<User>& users, vector<Admin>& admins)
     cout<<"Type in your name:"<<endl;
     cin>>tempName;
     cout<<"Type in your age:"<<endl;
-    cin>>tempAge;
+    validate(tempAge);
     cout<<"Type in your Pesel:"<<endl;
-    cin>>tempPesel;
+    validate(tempPesel);
     cout<<"Type in your document number:"<<endl;
     cin>>tempDocNumber;
     cout<<"Type in your password:"<<endl;
