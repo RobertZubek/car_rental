@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <limits>
 #include "User.h"
 #include "Admin.h"
 #include "Car.h"
@@ -12,6 +13,17 @@
 
 
 using namespace std;
+
+
+template <typename T>
+void validate(T &input)
+{
+     while (!(std::cin >> input)) {
+        cin.clear(); // Clear error flags
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+        cout << "Invalid input. Please enter a correct value: ";
+    }
+}
 
 ostream& operator<< (ostream& out, const User& user)
 {
@@ -131,6 +143,7 @@ int main(){
         cout<<"6. Remember your admin number"<<endl;
         int choice;
         cin>>choice;
+        validate(choice);
         if(choice==1){adminMenu(users, admins, cars, rents);}
         else if(choice==2){userMenu(users, admins, cars, rents);}
         else if(choice==3)
@@ -182,7 +195,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                 cout<<"4. List of cars"<<endl;
                 cin>>choice;
                 if (choice==1) {users[tempnumber].logOut(); c= false;}
-                if (choice==2)
+                else if (choice==2)
                 {
                     string tempstring;
                     string tempdates;
@@ -207,7 +220,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                         }
                     }
                 }
-                if (choice==3)
+                else if (choice==3)
                 {
                     for(int i=0; i<rents.size();i++)
                     {
@@ -217,7 +230,7 @@ void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vec
                         }
                     }
                 }
-                if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
+                else if (choice==4){for(int i=0; i<cars.size(); i++){cout<<cars[i];}}
                 else {cout<<"Type in correct value"<<endl;}
             }
         }
