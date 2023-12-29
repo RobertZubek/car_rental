@@ -14,18 +14,19 @@
 
 using namespace std;
 
-
+//template function for simple data validation
 template <typename T>
 void validate(T &input)
 {
-     while (!(std::cin >> input)) {
-        cin.clear(); // Clear error flags
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-        cout << "Invalid input. Please enter a correct value: "<<endl;
+     while (!(cin >> input)) {
+        cin.clear(); // clear error flags
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ciscard invalid input
+        cout << "Invalid input. Please enter a correct value: "<<endl; // ask again
         
     }
 }
 
+//ostream operators for classess
 ostream& operator<< (ostream& out, const User& user)
 {
     out<<"*************************"<<endl;
@@ -76,7 +77,7 @@ ostream& operator<< (ostream& out, const Rent& rent)
     return out; 
 }
 
-
+// functions for updating numbers after changes in vectors, added for being sure that everything works
 void update_usr_number(vector<User>& users)
 {
     for(int i=0;i<users.size();i++)
@@ -99,7 +100,7 @@ void update_rent_number(vector<Rent>& rents)
         rents[i].set_number(i);
     }
 }
-
+//menu functions declarations
 void adminMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents);
 void userMenu(vector<User>& users, vector<Admin>& admins, vector<Car>& cars, vector<Rent>& rents);
 void registerMenu(vector<User>& users, vector<Admin>& admins);
@@ -107,7 +108,9 @@ void rememberUsrNumberMenu(vector<User>& users);
 void rememberAdmNumberMenu(vector<Admin>& admins);
 void admRegister(vector<User>& users, vector<Admin>& admins);
 
+
 int main(){
+    //creating objects for handling saving and reading data
     adminSaver adminSave;
     userSaver userSave;
     carSaver carSave;
