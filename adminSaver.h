@@ -4,15 +4,18 @@
 
 using namespace std;
 
+//class for saving and reading data about admins
+
 class adminSaver
 {
 private:
 public:
+//method for saving data
 void save(vector<Admin>& admins)
 {
-    ofstream file("admins.txt");
-            if (file.is_open()) {
-                for (auto& obj : admins)
+    ofstream file("admins.txt");  //data saved to file admins.txt
+            if (file.is_open()) {  //checking if file opened without any errors
+                for (auto& obj : admins) //itering for all the objects in a vector
                 {
                     file << obj.get_name() << " " << obj.get_age() << " "<<obj.get_pesel()<<" "<<obj.get_document_number()<<" ";
                     file<<obj.get_password()<< " "<<obj.get_number()<<" "<< obj.get_active();
