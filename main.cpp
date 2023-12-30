@@ -13,7 +13,7 @@
 
 
 using namespace std;
-
+//
 //template function for simple data validation
 template <typename T>
 void validate(T &input)
