@@ -2,6 +2,8 @@
 
 using namespace std;
 
+
+//class representing admin, it is pretty the same as class User, made for clear code
 class Admin: public User
 {
 private:
