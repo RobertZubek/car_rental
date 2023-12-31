@@ -1,6 +1,8 @@
 #include <string>
 using namespace std;
 
+
+//class reoresenting rents
 class Rent{
 private:
     string fstatus;
@@ -10,6 +12,7 @@ private:
     int fnumber;
 public:
     ~Rent()=default;
+    //constructor
     Rent(string status, string dates, int user, string car, int number)
     {
         fstatus=status;
@@ -19,7 +22,9 @@ public:
         fnumber=number;
     }
 
-    void set_status_accepted(void){fstatus="accepted";}
+    //getters and setters
+
+    void set_status_accepted(void){fstatus="accepted";} //to avoid problems user can choose only from these 3 statuses
     void set_status_finished(void){fstatus="finished";}
     void set_status_declined(void){fstatus="declined";}
     void set_date(string dates){fdates=dates;}
