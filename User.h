@@ -1,6 +1,8 @@
 #include <vector>
 using namespace std;
 
+//class representing user
+
 class User
 {
 private:
@@ -26,6 +28,9 @@ public:
         
         
     }
+
+//getters and setters
+
     void set_name(string name){fname=name;}
     void set_age(int age){fage=age;}
     void set_pesel(int pesel){fpesel=pesel;}
@@ -44,6 +49,8 @@ public:
     int get_number(void)const{return fnumber;}
     bool get_active(void)const{return factive;}
     
+
+    //method for changing a password
     bool change_password(string password)
     {
         if(password==fpassword)
@@ -61,6 +68,8 @@ public:
             return false;
         }
     }
+
+    //method to remember a password if someone forgot
     void remember_password(int pesel, string document_number)
     {
         if(pesel==fpesel&&document_number==fdocument_number)
@@ -70,12 +79,14 @@ public:
         else{cout<<"Wrong data, try again"<<endl;}
     }
 
+    //method for logging in
     bool login(string password)
     {
         if(password==fpassword){cout<<"Logged susscessfully"<<endl; flogged=true; return true;}
         else{cout<<"Wrong password"<<endl; flogged=false; return false;}
     }
 
+    //method for logging out
     void logOut(void)
     {
         if(flogged==true){flogged=false;}
