@@ -54,7 +54,7 @@ vector<User> read(vector<User>& users) //method for reading data
     else {
         cout << "Failed to open users.txt" << endl; //informing
     }
-    return users; //returning full vector of users
+    return users; //returning a full vector of users
     
 }
 };
