@@ -28,28 +28,28 @@ void save(vector<Car>& cars) //method for saving data into cars vector
             }
 }
 
-vector<Car> read(vector<Car>& cars)
+vector<Car> read(vector<Car>& cars) //method for loading data when starting  a program
 {
     ifstream file("cars.txt");
-    if (file.is_open()) {
+    if (file.is_open()) { //checking if file is opened
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line)) { //repeating this until there are lines left in txt file
             stringstream ss(line);
             string status;
             string model;
             string description;
             float price;
-            ss >> status >> model>>description>>price;
-            Car obj(status, model, description, price);
-            cars.push_back(obj);
+            ss >> status >> model>>description>>price; //collecting data from 1 line about 1 object
+            Car obj(status, model, description, price); //creating an object...
+            cars.push_back(obj);//...and loading it into a vector
         }
         file.close();
-        cout << "Vector of objects loaded from cars.txt" << endl;
+        cout << "Vector of objects loaded from cars.txt" << endl; //informing
     }
     else {
-        cout << "Failed to open cars.txt" << endl;
+        cout << "Failed to open cars.txt" << endl; //informing
     }
-    return cars;
+    return cars; //returning a vector
     
 }
 };
