@@ -13,18 +13,18 @@ public:
 void save(vector<Car>& cars) //method for saving data into cars vector
 {
     ofstream file("cars.txt"); //file cars.txt is used
-            if (file.is_open()) {
+            if (file.is_open()) { //cheching if file opened correctly...
                 for (auto& obj : cars)
                 {
                     file << obj.get_status()<<" "<<obj.get_model()<<" "<<obj.get_description()<<" "<<obj.get_price()<<" ";
-                    file << endl;
+                    file << endl;//loading data about 1 car in 1 line in txt file
                 }
                 file.close();
-                cout << "Vector of cars saved to cars.txt" << endl;
+                cout << "Vector of cars saved to cars.txt" << endl; //confirming
             }
             else
             {
-                cout << "Failed to open txt file" << endl;
+                cout << "Failed to open txt file" << endl; //...if not, informing user
             }
 }
 
