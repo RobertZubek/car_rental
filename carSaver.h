@@ -4,13 +4,15 @@
 
 using namespace std;
 
+//class for saving and reading cars data
+
 class carSaver
 {
 private:
 public:
-void save(vector<Car>& cars)
+void save(vector<Car>& cars) //method for saving data into cars vector
 {
-    ofstream file("cars.txt");
+    ofstream file("cars.txt"); //file cars.txt is used
             if (file.is_open()) {
                 for (auto& obj : cars)
                 {
