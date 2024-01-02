@@ -4,26 +4,28 @@
 
 using namespace std;
 
+//class for reading and saving data about users
+
 class userSaver
 {
 private:
 public:
-void save(vector<User>& users)
+void save(vector<User>& users)//method for saving data about users
 {
-    ofstream file("users.txt");
-            if (file.is_open()) {
+    ofstream file("users.txt"); //file users.txt is being used
+            if (file.is_open()) { //checking if file is opened...
                 for (auto& obj : users)
                 {
                     file << obj.get_name() << " " << obj.get_age() << " "<<obj.get_pesel()<<" "<<obj.get_document_number()<<" ";
                     file<<obj.get_password()<< " "<<obj.get_number()<<" "<< obj.get_active();
-                    file << endl;
+                    file << endl; //collecting data about one user in one file line to separate them
                 }
                 file.close();
-                cout << "Vector of users saved to user.txt" << endl;
+                cout << "Vector of users saved to user.txt" << endl;//informing
             }
             else
             {
-                cout << "Failed to open txt file" << endl;
+                cout << "Failed to open txt file" << endl;//...informing user if not
             }
 }
 
