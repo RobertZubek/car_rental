@@ -29,12 +29,12 @@ void save(vector<User>& users)//method for saving data about users
             }
 }
 
-vector<User> read(vector<User>& users)
+vector<User> read(vector<User>& users) //method for reading data
 {
-    ifstream file("users.txt");
-    if (file.is_open()) {
+    ifstream file("users.txt"); //the same file as before
+    if (file.is_open()) { //checking if file is opened
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line)) { //do it until there are lines left in the file
             stringstream ss(line);
             string name;
             int age;
@@ -43,18 +43,18 @@ vector<User> read(vector<User>& users)
             string password;
             int number;
             bool active;
-            ss >> name >> age>>pesel>>doc>>password>>number>>active;
-            User obj(name, age, pesel, doc, false, password, active);
-            obj.set_number(number);
-            users.push_back(obj);
+            ss >> name >> age>>pesel>>doc>>password>>number>>active; //reading data from one line 
+            User obj(name, age, pesel, doc, false, password, active); //creating an object
+            obj.set_number(number); //setting user number
+            users.push_back(obj); //adding an object to a vector
         }
-        file.close();
-        cout << "Vector of objects loaded from users.txt" << endl;
+        file.close(); //closing a file
+        cout << "Vector of objects loaded from users.txt" << endl; //informing
     }
     else {
-        cout << "Failed to open users.txt" << endl;
+        cout << "Failed to open users.txt" << endl; //informing
     }
-    return users;
+    return users; //returning full vector of users
     
 }
 };
