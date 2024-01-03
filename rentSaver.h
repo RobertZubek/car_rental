@@ -44,16 +44,16 @@ vector<Rent> read(vector<Rent>& rents)
             string car;
             int number;
             ss >> status >> dates>>uNumber>>car>>number; //collecting data about 1 object in 1 line
-            Rent obj(status, dates, uNumber, car, number); 
-            rents.push_back(obj);
+            Rent obj(status, dates, uNumber, car, number); //creating an object
+            rents.push_back(obj); //pushing an object into a vector
         }
-        file.close();
-        cout << "Vector of objects loaded from rents.txt" << endl;
+        file.close(); //closing a file
+        cout << "Vector of objects loaded from rents.txt" << endl; //confirmation
     }
     else {
-        cout << "Failed to open rents.txt" << endl;
+        cout << "Failed to open rents.txt" << endl; //info when something is wrong
     }
-    return rents;
+    return rents; //returning a full vector
     
 }
 };
