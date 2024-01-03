@@ -49,7 +49,7 @@ vector<Car> read(vector<Car>& cars) //method for loading data when starting  a p
     else {
         cout << "Failed to open cars.txt" << endl; //informing
     }
-    return cars; //returning a vector
+    return cars; //returning a full vector
     
 }
 };
