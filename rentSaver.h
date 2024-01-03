@@ -4,25 +4,29 @@
 
 using namespace std;
 
+
+//class for saving and reading data about rents
 class rentSaver
 {
 private:
 public:
+
+//method for saving data
 void save(vector<Rent>& rents)
 {
-    ofstream file("rents.txt");
-            if (file.is_open()) {
+    ofstream file("rents.txt"); //data is stored in rents.txt
+            if (file.is_open()) { //checking if file is opened
                 for (auto& obj : rents)
                 {
                     file << obj.get_status()<<" "<<obj.get_dates()<<" "<<obj.get_user_number()<<" "<<obj.get_car()<<" "<<obj.get_number()<<" ";
-                    file << endl;
+                    file << endl; //loading info about 1 object in 1 file line
                 }
-                file.close();
-                cout << "Vector of rents saved to rents.txt" << endl;
+                file.close(); //closing file
+                cout << "Vector of rents saved to rents.txt" << endl; //confirmation
             }
             else
             {
-                cout << "Failed to open txt file" << endl;
+                cout << "Failed to open txt file" << endl; //info when something is wrong
             }
 }
 
