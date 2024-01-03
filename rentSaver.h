@@ -30,20 +30,21 @@ void save(vector<Rent>& rents)
             }
 }
 
+//method for reading
 vector<Rent> read(vector<Rent>& rents)
 {
-    ifstream file("rents.txt");
-    if (file.is_open()) {
+    ifstream file("rents.txt"); //the same file
+    if (file.is_open()) { //checking if file is opened
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line)) { //do this until there are lines left in the file
             stringstream ss(line);
             string status;
             string dates;
             int uNumber;
             string car;
             int number;
-            ss >> status >> dates>>uNumber>>car>>number;
-            Rent obj(status, dates, uNumber, car, number);
+            ss >> status >> dates>>uNumber>>car>>number; //collecting data about 1 object in 1 line
+            Rent obj(status, dates, uNumber, car, number); 
             rents.push_back(obj);
         }
         file.close();
